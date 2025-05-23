@@ -10,7 +10,7 @@ function App() {
       <li>Pedro Dardo Ramon Cayo </li>
       <li>Torres Cintia Cristina </li>
       <li>Torres Pablo Gabriel </li>
-      <li> </li>
+      <li>Vargas Soraida Ana Lucia </li>
     </ul>
     </>
   )
