@@ -3,21 +3,34 @@ import Layout from '../components/Layout';
 import Home from '../pages/Home';
 import AlumnoForm from '../components/AlumnoForm';
 import ListaAlumnos from '../pages/ListaAlumnos';
-import NuevoAlumno from '../pages/NuevoAlumno'
+import NuevoAlumno from '../pages/NuevoAlumno';
+import EditarAlumno from '../pages/EditarAlumno';
+import AlumnoCard from '../components/AlumnoCard'; 
 
-function AppRouter() {
+function AppRouter({ alumnos, onAgregarSubmit, onEditarSubmit, onEliminar }) {
   return (
     <Routes>
-      <Route path="/" element = {<Layout />}>
+      <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path="/ListaAlumnos" element={<ListaAlumnos/>} />
-        <Route path="/NuevoALumno" element={< NuevoAlumno/>} />
-        <Route path="/Nosotros" element={<AlumnoCard />} />
+        <Route
+          path="/lista-alumnos" 
+          element={<ListaAlumnos alumnos={alumnos} onEliminar={onEliminar} />}
+        />
+        <Route
+          path="/nuevo-alumno" 
+          element={<NuevoAlumno onAgregarSubmit={onAgregarSubmit} />}
+        />
+        <Route
+          path="/editar-alumno/:lu" 
+          element={<EditarAlumno alumnos={alumnos} onEditarSubmit={onEditarSubmit} />}
+        />
+        <Route
+          path="/nosotros" 
+          element={<AlumnoCard />}
+        />
       </Route>
     </Routes>
-  )
+  );
 }
-
-
 
 export default AppRouter;
