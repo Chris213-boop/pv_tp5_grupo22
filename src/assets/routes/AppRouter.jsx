@@ -1,12 +1,11 @@
 import { Routes, Route } from 'react-router-dom';
 import Layout from '../components/Layout';
 import Home from '../pages/Home';
-import AlumnoForm from '../components/AlumnoForm';
 import ListaAlumnos from '../pages/ListaAlumnos';
 import NuevoAlumno from '../pages/NuevoAlumno';
 import EditarAlumno from '../pages/EditarAlumno';
 import DetalleAlumno from '../pages/DetalleAlumno';
-import AlumnoCard from '../components/AlumnoCard'; 
+//import Nosotros from '../pages/Nosotros'; 
 
 function AppRouter({ alumnos, onAgregarSubmit, onEditarSubmit, onEliminar }) {
   return (
@@ -14,22 +13,22 @@ function AppRouter({ alumnos, onAgregarSubmit, onEditarSubmit, onEliminar }) {
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route
-          path="/lista-alumnos" 
+          path="/ListaAlumnos" 
           element={<ListaAlumnos alumnos={alumnos} onEliminar={onEliminar} />}
         />
         <Route
-          path="/nuevo-alumno" 
+          path="/NuevoAlumno" 
           element={<NuevoAlumno onAgregarSubmit={onAgregarSubmit} />}
         />
         <Route
-          path="/editar-alumno/:lu" 
+          path="/EditarAlumno/:lu" 
           element={<EditarAlumno alumnos={alumnos} onEditarSubmit={onEditarSubmit} />}
         />
-        <Route
-          path="/nosotros" 
-          element={<AlumnoCard />}
-        />
-        <Route path="/detalle-alumno/:" 
+        {/* <Route
+          path="/Nosotros" 
+          element={<Nosotros />}
+        /> */}
+        <Route path="/DetalleAlumno/:lu" 
         element={<DetalleAlumno alumnos={alumnos} />} 
         />
 

@@ -1,6 +1,4 @@
-import { useState } from "react";
 import Alumno from "../data/AlumnoData.jsx";
-import ListaAlumnos from "../pages/ListaAlumnos.jsx";
 
 const AlumnoForm = [
     Alumno({ nombre: "Juan", apellido: "Pérez", curso: "1A", email: "juan@mail.com", domicilio: "Calle 123", telefono: "123456789", estado: "activo" }),
