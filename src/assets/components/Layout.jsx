@@ -12,7 +12,7 @@ function Layout() {
                     <Nav.Link href="/">Inicio</Nav.Link>
                     <Nav.Link href="/ListaAlumnos">Lista de Alumnos</Nav.Link>
                     <Nav.Link href="#/NuevoALumno">Nuevo Alumno</Nav.Link>
-                    <Nav.Link href="#/Nosostros">Nosotros</Nav.Link>
+                    <Nav.Link href="/Nosotros">Nosotros</Nav.Link>
             </Container>
         </Navbar>
          <Container className="mt-4">
