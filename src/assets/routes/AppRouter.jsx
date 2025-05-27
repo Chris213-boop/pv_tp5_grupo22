@@ -5,6 +5,7 @@ import AlumnoForm from '../components/AlumnoForm';
 import ListaAlumnos from '../pages/ListaAlumnos';
 import NuevoAlumno from '../pages/NuevoAlumno';
 import EditarAlumno from '../pages/EditarAlumno';
+import DetalleAlumno from '../pages/DetalleAlumno';
 import AlumnoCard from '../components/AlumnoCard'; 
 
 function AppRouter({ alumnos, onAgregarSubmit, onEditarSubmit, onEliminar }) {
@@ -28,6 +29,10 @@ function AppRouter({ alumnos, onAgregarSubmit, onEditarSubmit, onEliminar }) {
           path="/nosotros" 
           element={<AlumnoCard />}
         />
+        <Route path="/detalle-alumno/:" 
+        element={<DetalleAlumno alumnos={alumnos} />} 
+        />
+
       </Route>
     </Routes>
   );
