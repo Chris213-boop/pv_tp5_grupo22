@@ -5,7 +5,7 @@ import ListaAlumnos from '../pages/ListaAlumnos';
 import NuevoAlumno from '../pages/NuevoAlumno';
 import EditarAlumno from '../pages/EditarAlumno';
 import DetalleAlumno from '../pages/DetalleAlumno';
-//import Nosotros from '../pages/Nosotros'; 
+import Nosotros from '../pages/Nosotros'; 
 
 function AppRouter({ alumnos, onAgregarSubmit, onEditarSubmit, onEliminar }) {
   return (
@@ -24,10 +24,10 @@ function AppRouter({ alumnos, onAgregarSubmit, onEditarSubmit, onEliminar }) {
           path="/EditarAlumno/:lu" 
           element={<EditarAlumno alumnos={alumnos} onEditarSubmit={onEditarSubmit} />}
         />
-        {/* <Route
+        <Route
           path="/Nosotros" 
           element={<Nosotros />}
-        /> */}
+        /> 
         <Route path="/DetalleAlumno/:lu" 
         element={<DetalleAlumno alumnos={alumnos} />} 
         />
