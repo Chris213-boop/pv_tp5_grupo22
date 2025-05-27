@@ -13,7 +13,7 @@ const DetalleAlumno = ({ alumnos }) => {
 
   // Si no existe, redirige a la lista de alumnos
   if (!alumno) {
-    return <Navigate to="/lista-alumnos" replace />;
+    return <Navigate to="/ListaAlumnos" replace />;
   }
 
   return (
@@ -35,7 +35,7 @@ const DetalleAlumno = ({ alumnos }) => {
           <Button variant="secondary" onClick={() => navigate(-1)}>
             Volver
           </Button>{' '}
-          <Button variant="warning" onClick={() => navigate(`/editar-alumno/${alumno.lu}`)}>
+          <Button variant="warning" onClick={() => navigate(`/EditarAlumno/${alumno.lu}`)}>
             Editar
           </Button>
         </Card.Body>
