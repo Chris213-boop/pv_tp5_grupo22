@@ -7,7 +7,7 @@ function AlumnoCard({ alumno }) {
   const navigate = useNavigate();
 
   const handleVerDetalles = () => {
-    navigate(`/alumnos/${alumno.lu}`);
+    navigate(`/DetalleAlumno/${alumno.lu}`);
   };
 
   return (
