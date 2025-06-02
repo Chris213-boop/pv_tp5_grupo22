@@ -1,13 +1,13 @@
 
 import Row from 'react-bootstrap/Row';
 import AlumnoCard from '../components/AlumnoCard.jsx';
-import AlumnoForm from "../components/AlumnoForm.jsx"; // <-- cambiar nombre para que sea claro
+import ListaAlumnosExistentes from "../components/ListaAlumnosExistentes.jsx";
 
-function ListaAlumnos() {
+function MostrarListaAlumnos() {
     return (
         <div>
             <Row xs={1} md={4} className="g-4">
-                {AlumnoForm.map((alumno) => (
+                {ListaAlumnosExistentes.map((alumno) => (
                     <AlumnoCard key={alumno.lu} alumno={alumno} />
                 ))}
             </Row>
@@ -15,4 +15,4 @@ function ListaAlumnos() {
     );
 }
 
-export default ListaAlumnos;
+export default MostrarListaAlumnos;
