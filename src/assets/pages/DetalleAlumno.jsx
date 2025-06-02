@@ -1,4 +1,3 @@
-import React from 'react';
 import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
@@ -13,7 +12,7 @@ const DetalleAlumno = ({ alumnos }) => {
 
   // Si no existe, redirige a la lista de alumnos
   if (!alumno) {
-    return <Navigate to="/ListaAlumnos" replace />;
+    return <Navigate to="/MostrarListaAlumnos" replace />;
   }
 
   return (

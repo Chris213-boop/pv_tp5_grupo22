@@ -10,7 +10,8 @@ function Layout() {
         <Navbar bg="light" data-bs-theme="light">
             <Container>
                     <Nav.Link href="/">Inicio</Nav.Link>
-                    <Nav.Link href="/ListaAlumnos">Lista de Alumnos</Nav.Link>
+                    <Nav.Link href="/MostrarListaAlumnos">Lista de Alumnos</Nav.Link>
+                    <Nav.Link href="/AlumnoFormulario">formulario</Nav.Link>
                     <Nav.Link href="#/NuevoALumno">Nuevo Alumno</Nav.Link>
                     <Nav.Link href="/Nosotros">Nosotros</Nav.Link>
             </Container>
