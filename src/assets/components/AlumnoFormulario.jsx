@@ -1,96 +1,137 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
 
-function FormularioAlumno() {
+function AlumnoFormulario({ initialData = {}, onSubmitForm, isEditMode = false }) {
   const [validated, setValidated] = useState(false);
+  const [formData, setFormData] = useState({
+    nombre: '',
+    apellido: '',
+    curso: '',
+    email: '',
+    domicilio: '',
+    telefono: '',
+    estado: 'activo',
+  });
+  useEffect(() => {
+    if (isEditMode && initialData) {
+      setFormData({
+        nombre: initialData.nombre || '',
+        apellido: initialData.apellido || '',
+        curso: initialData.curso || '',
+        email: initialData.email || '',
+        domicilio: initialData.domicilio || '',
+        telefono: initialData.telefono || '',
+        estado: initialData.estado || 'activo',
+      });
+    } else {
+      setFormData({
+        nombre: '',
+        apellido: '',
+        curso: '',
+        email: '',
+        domicilio: '',
+        telefono: '',
+        estado: 'activo',
+      });
+    }
+  }, [initialData, isEditMode]);
 
-  const manejarEnvio = (event) => {
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData(prevData => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+  
+  const handleSubmit = (event) => {
+    event.preventDefault();
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
-      event.preventDefault();
       event.stopPropagation();
+      setValidated(true);
+      return;
     }
-
     setValidated(true);
+    onSubmitForm(formData);
   };
 
   return (
-    <Form noValidate validated={validated} onSubmit={manejarEnvio}>
+    <Form noValidate validated={validated} onSubmit={handleSubmit}>
       <Row className="mb-3">
-        <Form.Group as={Col} md="4" controlId="validationCustom01">
+        <Form.Group as={Col} md="6" controlId="formNombre">
           <Form.Label>Nombre/s</Form.Label>
           <Form.Control
             required
             type="text"
-            placeholder="First name"
-            defaultValue="Leandro"
+            placeholder="Nombre del alumno"
+            name="nombre"
+            value={formData.nombre}
+            onChange={handleChange}
           />
-          <Form.Control.Feedback>Datos correctos</Form.Control.Feedback>
+          <Form.Control.Feedback type="invalid">Por favor ingrese un nombre.</Form.Control.Feedback>
         </Form.Group>
-        <Form.Group as={Col} md="4" controlId="validationCustom02">
+        <Form.Group as={Col} md="6" controlId="formApellido">
           <Form.Label>Apellido</Form.Label>
           <Form.Control
             required
             type="text"
-            placeholder="Last name"
-            defaultValue="Perez"
+            placeholder="Apellido del alumno"
+            name="apellido"
+            value={formData.apellido}
+            onChange={handleChange}
           />
-          <Form.Control.Feedback>Datos correctos</Form.Control.Feedback>
-        </Form.Group>
-        <Form.Group as={Col} md="4" controlId="validationCustomUsername">
-          <Form.Label>Nombre de Usuario</Form.Label>
-          <InputGroup hasValidation>
-            <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
-            <Form.Control
-              type="text"
-              placeholder="Perez_Leandro"
-              aria-describedby="inputGroupPrepend"
-              required
-            />
-            <Form.Control.Feedback type="invalid">
-              Por favor proporcione un nombre de usuario válido.
-            </Form.Control.Feedback>
-          </InputGroup>
+          <Form.Control.Feedback type="invalid">Por favor ingrese un apellido.</Form.Control.Feedback>
         </Form.Group>
       </Row>
       <Row className="mb-3">
-        <Form.Group as={Col} md="6" controlId="validationCustom03">
-          <Form.Label>Domicilio</Form.Label>
-          <Form.Control type="text" placeholder="Av. Córdoba 720 " required />
-          <Form.Control.Feedback type="invalid">
-            Por favor proporcione un domicilio válido.
-          </Form.Control.Feedback>
+        <Form.Group as={Col} md="6" controlId="formEmail">
+          <Form.Label>Email</Form.Label>
+          <Form.Control type="email" placeholder="Email" name="email" value={formData.email} onChange={handleChange} required />
+          <Form.Control.Feedback type="invalid">Por favor ingrese un email válido.</Form.Control.Feedback>
         </Form.Group>
-        <Form.Group as={Col} md="3" controlId="validationCustom04">
+        <Form.Group as={Col} md="6" controlId="formCurso">
           <Form.Label>Curso</Form.Label>
-          <Form.Control type="text" placeholder="3º Año B" required />
-          <Form.Control.Feedback type="invalid">
-            Por favor proporcione un curso válido.
-          </Form.Control.Feedback>
+          <Form.Control type="text" placeholder="Ej: 3º Año B" name="curso" value={formData.curso} onChange={handleChange} required />
+          <Form.Control.Feedback type="invalid">Por favor ingrese un curso.</Form.Control.Feedback>
         </Form.Group>
-        <Form.Group as={Col} md="3" controlId="validationCustom05">
-          <Form.Label>Celular</Form.Label>
-          <Form.Control type="text" placeholder="+549 1123456789" required />
-          <Form.Control.Feedback type="invalid">
-            Por favor proporcione un número de celular valido.
-          </Form.Control.Feedback>
+      </Row>
+      <Row className="mb-3">
+        <Form.Group as={Col} md="12" controlId="formDomicilio">
+          <Form.Label>Domicilio</Form.Label>
+          <Form.Control type="text" placeholder="Ej: Av. Córdoba 720" name="domicilio" value={formData.domicilio} onChange={handleChange} required />
+          <Form.Control.Feedback type="invalid">Por favor ingrese un domicilio.</Form.Control.Feedback>
+        </Form.Group>
+      </Row>
+      <Row className="mb-3">
+        <Form.Group as={Col} md="6" controlId="formTelefono">
+          <Form.Label>Teléfono/Celular</Form.Label>
+          <Form.Control type="text" placeholder="Ej: +5491123456789" name="telefono" value={formData.telefono} onChange={handleChange} required />
+          <Form.Control.Feedback type="invalid">Por favor ingrese un número de teléfono válido.</Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group as={Col} md="6" controlId="formEstado">
+          <Form.Label>Estado</Form.Label>
+          <Form.Select name="estado" value={formData.estado} onChange={handleChange} required>
+            <option value="activo">Activo</option>
+            <option value="inactivo">Inactivo</option>
+          </Form.Select>
+          <Form.Control.Feedback type="invalid">Por favor seleccione un estado.</Form.Control.Feedback>
         </Form.Group>
       </Row>
       <Form.Group className="mb-3">
         <Form.Check
           required
           label="Declaro que la información proporcionada es verdadera y completa."
-          feedback="You must agree before submitting."
+          feedback="Debes aceptar los términos antes de enviar."
           feedbackType="invalid"
         />
       </Form.Group>
-      <Button type="submit">Cargar Alumno</Button>
+      <Button type="submit">{isEditMode ? 'Guardar Cambios' : 'Cargar Alumno'}</Button>
     </Form>
   );
 }
 
-export default FormularioAlumno;
+export default AlumnoFormulario;

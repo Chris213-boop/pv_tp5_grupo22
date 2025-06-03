@@ -1,31 +1,61 @@
 import { useParams, useNavigate, Navigate } from 'react-router-dom';
-import ListaAlumnosExistentes from '../components/ListaAlumnosExistentes';
+import { useState, useEffect } from 'react';
+import AlumnoFormulario from '../components/AlumnoFormulario';
+import ListaAlumnosExistentesData from '../components/ListaAlumnosExistentes';
+import Container from 'react-bootstrap/Container';
 
-const EditarAlumno = ({ alumnos, actualizarAlumno }) => {
-  const { lu } = useParams(); 
+const EditarAlumno = () => {
+  const { lu: luParam } = useParams();
   const navigate = useNavigate();
+  const [alumnoAEditar, setAlumnoAEditar] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const alumnoAEditar = alumnos.find(alumno => alumno.Lu === lu);
-  if (!alumnoAEditar) {
-    console.warn(`Alumno con LU "${lu}" no encontrado para editar.`);
+  useEffect(() => {
+    const luNumerico = parseInt(luParam, 10);
+    const encontrado = ListaAlumnosExistentesData.find(alumno => alumno.lu === luNumerico);
+    
+    if (encontrado) {
+      setAlumnoAEditar(encontrado);
+    } else {
+      console.warn(`Alumno con LU "${luParam}" no encontrado para editar.`);
+    }
+    setLoading(false);
+  }, [luParam]);
+
+  const handleActualizarAlumno = (datosFormulario) => {
+    const indiceAlumno = ListaAlumnosExistentesData.findIndex(a => a.lu === alumnoAEditar.lu);
+    if (indiceAlumno !== -1) {
+      ListaAlumnosExistentesData[indiceAlumno] = { 
+        ...ListaAlumnosExistentesData[indiceAlumno],
+        ...datosFormulario
+      };
+      console.log("Alumno actualizado:", ListaAlumnosExistentesData[indiceAlumno]);
+      alert('Alumno actualizado con éxito!');
+      navigate('/MostrarListaAlumnos');
+    } else {
+      console.error("Error al actualizar: Alumno no encontrado en la lista.");
+      alert('Error al actualizar el alumno.');
+    }
+  };
+
+  if (loading) {
+    return <Container><p>Cargando datos del alumno...</p></Container>;
+  }
+
+  if (!alumnoAEditar && !loading) {
     return <Navigate to="/MostrarListaAlumnos" replace />;
   }
 
-  const actualizarDatosAlumno = (datosAlumnoActualizado) => {
-    actualizarAlumno(alumnoAEditar.Lu, datosAlumnoActualizado);
-    navigate('/MostrarListaAlumnos');
-  };
-
   return (
-    <div>
+    <Container className="mt-4">
       <h2>Editar Alumno: {alumnoAEditar.nombre} {alumnoAEditar.apellido}</h2>
-      <ListaAlumnosExistentes
+      <AlumnoFormulario
         initialData={alumnoAEditar}
-        onSubmitForm={actualizarDatosAlumno}
+        onSubmitForm={handleActualizarAlumno}
         isEditMode={true} 
       />
-    </div>
-  );
-};
-
-export default EditarAlumno;
+    </Container>
+   );
+ };
+ 
+ export default EditarAlumno;
