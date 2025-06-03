@@ -2,13 +2,13 @@ import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import AlumnoForm from '../components/AlumnoForm'; // Asegurate que el path es correcto
+import ListaAlumnosExistentes from '../components/ListaAlumnosExistentes'; 
 
 const DetalleAlumno = () => {
   const { lu } = useParams();
   const navigate = useNavigate();
 
-  const alumno = AlumnoForm.find(a => a.lu === parseInt(lu));
+  const alumno = ListaAlumnosExistentes.find(a => a.lu === parseInt(lu));
 
   if (!alumno) {
     return <Navigate to="/MostrarListaAlumnos" replace />;
