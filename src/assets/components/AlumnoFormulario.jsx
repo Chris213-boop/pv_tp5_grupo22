@@ -11,6 +11,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Badge from 'react-bootstrap/Badge';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Container from 'react-bootstrap/esm/Container';
 
 
 function AlumnoFormulario({ onAddAlumno }) {
@@ -83,6 +84,7 @@ function AlumnoFormulario({ onAddAlumno }) {
   };
 
   return (
+    <Container >
     <Form onSubmit={handleSubmit} noValidate>
       <h2><Badge bg="primary">Agregar Nuevo Alumno</Badge></h2>
 
@@ -210,7 +212,7 @@ function AlumnoFormulario({ onAddAlumno }) {
         <Button type="submit" variant="primary" size="lg">Agregar Alumno</Button>
       </Form.Group>
     </Form >
-
+    </Container>
   );
 }
 
