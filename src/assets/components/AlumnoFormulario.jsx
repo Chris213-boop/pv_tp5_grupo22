@@ -1,10 +1,13 @@
+
 import { useState, useEffect } from 'react';
 import { useNavigate} from 'react-router-dom';
 import AlumnoData from './AlumnoData';
+
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
+
 
 // function AlumnoFormulario({ initialData = {}, onSubmitForm, isEditMode = false }) {
 //   const [validated, setValidated] = useState(false);
@@ -247,6 +250,15 @@ function AlumnoFormulario({ onAddAlumno }) {
         </form>
       
     </div>
+//import { useAlumnoFormulario } from './useAlumnoFormulario';
+
+//function AlumnoFormulario({ initialData = {}, onSubmitForm, isEditMode = false }) {
+//  const { formData, validated, handleChange, handleSubmit } = useAlumnoFormulario({
+//    initialData,
+//    onSubmitForm,
+//    isEditMode,
+//  });
+
   );
 }
 
