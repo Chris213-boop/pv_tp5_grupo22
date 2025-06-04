@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from 'react';
 import AlumnoFormulario from './AlumnoFormulario';
 import AlumnoDelete from './AlumnoDelete';
 import EditarAlumno from './EditarAlumno';
-//import SearchResults from './SearchResults';
+
 import MostrarListaAlumnos from './MostrarListaAlumnos';
 
 function App() {
@@ -24,24 +24,32 @@ function App() {
     setAlumnos(prev => [...prev, nuevoAlumno]);
   }, []);
 
-  const deshabilitarAlumno = useCallback((idABuscar) => {
-    let encontrado = false;
-    setAlumnos(prev =>
-      prev.map(alumno => {
-        if (alumno.id.toString() === idABuscar) {
-          encontrado = true;
-          return { ...alumno, estado: false };
-        }
-        return alumno;
-      })
-    );
-    return encontrado;
-  }, []);
+  const deshabilitarAlumno = useCallback((valorBusqueda) => {
+  const valor = valorBusqueda.toLowerCase().trim();
+  let encontrado = false;
+
+  setAlumnos(prev =>
+    prev.map(alumno => {
+      const luMatch = alumno.lu.toString() === valor;
+      const nombreMatch = alumno.nombre?.toLowerCase() === valor;
+      const apellidoMatch = alumno.apellido?.toLowerCase() === valor;
+
+      if ((luMatch || nombreMatch || apellidoMatch) && alumno.estado !== false) {
+        encontrado = true;
+        return { ...alumno, estado: false };
+      }
+
+      return alumno;
+    })
+  );
+
+  return encontrado;
+}, []);
 
   const actualizarAlumno = useCallback((alumnoActualizado) => {
     setAlumnos(prev =>
       prev.map(alumno =>
-        alumno.id === alumnoActualizado.id
+        alumno.lu === alumnoActualizado.lu
           ? { ...alumno, ...alumnoActualizado }
           : alumno
       )

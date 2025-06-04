@@ -1,34 +1,34 @@
 import { useState } from 'react';
 
 function AlumnoDelete({ onDelete }) {
-    const [id, setId] = useState('');
+    const [lu, setLu] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (id.trim() === '') return;
+        if (lu.trim() === '') return;
 
-        const fueDesactivado = onDelete(id);
+        const fueDesactivado = onDelete(lu);
 
         if (fueDesactivado) {
-            alert("Producto con ID : ${id} ha sido Eliminado.");
+            alert(`Alumno con LU / Nombre / Apellido "${lu}" ha sido eliminado.`);
         } else {
-            alert("No se encontró un producto con ID :${id}.");
+            alert(`No se encontró un alumno con LU / Nombre / Apellido "${lu}".`);
         }
 
-        setId('');
+        setLu('');
     };
 
     return (
         <div>
-            <h2>Eliminar Producto por ID</h2>
+            <h2>Eliminar Alumno por lu</h2>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label htmlFor="busqueda">ID, Nombre o Marca:</label>
+                    <label htmlFor="busqueda">LU, Nombre o Apellido:</label>
                     <input
                         type="text"
-                        value={id}
-                        onChange={(e) => setId(e.target.value)}
-                        placeholder="ID del producto"
+                        value={lu}
+                        onChange={(e) => setLu(e.target.value)}
+                        placeholder="LU del Alumno"
                     />
                 </div>
                 <div>
