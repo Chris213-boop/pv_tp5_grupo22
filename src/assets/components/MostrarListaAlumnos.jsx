@@ -41,8 +41,8 @@ function MostrarListaAlumnos({ alumnos }) {
                     </thead>
                     <tbody>
                         {lista.map((alumno) => (
-                            <tr key={alumno.id}>
-                                <td>{alumno.id}</td>
+                            <tr key={alumno.lu}>
+                                <td>{alumno.lu}</td>
                                 <td>{alumno.nombre}</td>
                                 <td>{alumno.apellido}</td>
                                 <td>{alumno.curso}</td>
