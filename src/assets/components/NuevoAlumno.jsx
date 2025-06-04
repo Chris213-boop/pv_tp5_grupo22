@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import ListaAlumnosExistentes from '../components/ListaAlumnosExistentes';
-import Alumno from '../data/AlumnoData';
+import Alumno from '../components/AlumnoData';
 
 const NuevoAlumno = ({ agregarAlumno }) => {
   const navigate = useNavigate();

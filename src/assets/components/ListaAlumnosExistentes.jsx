@@ -1,4 +1,4 @@
-import Alumno from "../data/AlumnoData.jsx";
+import Alumno from "./AlumnoData.jsx";
 
 const ListaAlumnosExistentes = [
     Alumno({ nombre: "Juan", apellido: "Pérez", curso: "1A", email: "juan@mail.com", domicilio: "Calle 123", telefono: "123456789", estado: "activo" }),
