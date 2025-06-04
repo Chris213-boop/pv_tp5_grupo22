@@ -1,12 +1,12 @@
 import { Routes, Route } from 'react-router-dom';
-import Layout from '../components/Layout';
-import Home from '../pages/Home';
+import Layout from './Layout';
+import Home from './Home';
 import MostrarListaAlumnos from '../pages/MostrarListaAlumnos';
 import NuevoAlumno from '../pages/NuevoAlumno';
 import EditarAlumno from '../pages/EditarAlumno';
 import DetalleAlumno from '../pages/DetalleAlumno';
-import Nosotros from '../pages/Nosotros'; 
-import AlumnoFormulario from '../components/AlumnoFormulario'
+import Nosotros from './Nosotros'; 
+import AlumnoFormulario from './AlumnoFormulario'
 
 function AppRouter({ alumnos, agregarAlumno, actualizarAlumno, eliminarAlumno }) {
   return (
