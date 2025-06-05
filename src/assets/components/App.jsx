@@ -12,15 +12,13 @@ import Home from './Home';
 import Nosotros from './Nosotros';
 
 import MostrarListaAlumnos from './MostrarListaAlumnos';
+import BuscarAlumnoPage from './BuscarAlumnoPage';
+import BuscarAlumno from './BuscarAlumno';
+
 
 function App() {
   const [alumnos, setAlumnos] = useState([]);
-  const [resultados, setResultados] = useState([]);
-  const [noEncontrado, setNoEncontrado] = useState(false);
-
-
-
-
+ 
   useEffect(() => {
     if (alumnos.length > 0) {
       console.log("Lista de alumnos actualizada:", alumnos);
@@ -32,26 +30,19 @@ function App() {
   }, []);
 
   const deshabilitarAlumno = useCallback((valorBusqueda) => {
-    const valor = valorBusqueda.toLowerCase().trim();
-    let encontrado = false;
+    const alumnoEncontrado = BuscarAlumno(alumnos, valorBusqueda);
 
-    setAlumnos(prev =>
-      prev.map(alumno => {
-        const luMatch = alumno.lu.toString() === valor;
-        const nombreMatch = alumno.nombre?.toLowerCase() === valor;
-        const apellidoMatch = alumno.apellido?.toLowerCase() === valor;
+    if(alumnoEncontrado && alumnoEncontrado.estado !== false) {
+      setAlumnos(prev =>
+        prev.map(alumno =>
+          alumno === alumnoEncontrado ? {...alumno, estado: false } : alumno
+        )
+      );
+      return true;
+  }
+  return false;
+  }, [alumnos]);
 
-        if ((luMatch || nombreMatch || apellidoMatch) && alumno.estado !== false) {
-          encontrado = true;
-          return { ...alumno, estado: false };
-        }
-
-        return alumno;
-      })
-    );
-
-    return encontrado;
-  }, []);
 
   const actualizarAlumno = useCallback((alumnoActualizado) => {
     setAlumnos(prev =>
@@ -63,24 +54,11 @@ function App() {
     );
   }, []);
 
-  // const buscarAlumno = useCallback((termino) => {
-  //   const resultado = alumnos.filter(alumno => {
-  //     const idMatch = alumno.id.toString() === termino;
-  //     const nombreMatch = alumno.nombre.toLowerCase().includes(termino.toLowerCase());
-  //     const marcaMatch = alumno.marca && alumno.marca.toLowerCase().includes(termino.toLowerCase());
-  //     return (idMatch || nombreMatch || marcaMatch) && alumno.estado === true;
-  //   });
-
-  //   setNoEncontrado(resultado.length === 0);
-  //   setResultados(resultado);
-  // }, [alumnos]);
-
-  // const resetNoEncontrado = () => setNoEncontrado(false);
 
   return (
     <div>
       <Navbar bg="light" data-bs-theme="light">
-        <Container className="mt-4">
+        <Container fluid className="mt-4 bg-primary text-white p-4 rounded-3">
           <Nav.Link as={Link} to="/">Inicio</Nav.Link>
           <Nav.Link as= {Link} to="/agregar">Agregar Alumno</Nav.Link>
           <Nav.Link as= {Link} to="/buscar">Buscar Alumno</Nav.Link>
@@ -95,14 +73,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/agregar" element={<AlumnoFormulario onAddAlumno={handleAgregarAlumno} />} />
-          {/* <Route path="/buscar" element={
-            <SearchResults
-              buscarAlumno={buscarAlumno}
-              resultados={resultados}
-              noEncontrado={noEncontrado}
-              resetNoEncontrado={resetNoEncontrado}
-            />} 
-          /> */}
+          <Route path="/buscar" element={<BuscarAlumnoPage alumnos={alumnos} />} 
+          />
           <Route path="/eliminar" element={<AlumnoDelete onDelete={deshabilitarAlumno} />} />
           <Route path="/editar" element={<EditarAlumno alumnos={alumnos} onUpdate={actualizarAlumno} />} />
           <Route path="/listar" element={<MostrarListaAlumnos alumnos={alumnos} />} />
