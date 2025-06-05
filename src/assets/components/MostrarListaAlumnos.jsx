@@ -1,9 +1,23 @@
 import { Container, Card, Row, Col, Badge } from 'react-bootstrap';
-
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import DetalleAlumno from './DetalleAlumno';
 
 function MostrarListaAlumnos({ alumnos }) {
     const alumnosActivos = alumnos.filter(a => a.estado === true);
     const alumnosInactivos = alumnos.filter(a => a.estado === false);
+
+    const [alumnoSeleccionado, setAlumnoSeleccionado] = useState(null);
+
+    if (alumnoSeleccionado) {
+    return (
+      <DetalleAlumno
+        alumno={alumnoSeleccionado}
+        volver={() => setAlumnoSeleccionado(null)}
+      />
+    );
+  }
 
     const CardsAlumnos = (lista, titulo, color) => (
     <div className="mb-4">
@@ -18,18 +32,31 @@ function MostrarListaAlumnos({ alumnos }) {
             <Col key={alumno.lu}>
               <Card className="h-100 shadow-sm">
                 <Card.Body>
+                  <Card.Img
+            variant="top"
+            src="https://cdn-icons-png.flaticon.com/512/4794/4794936.png"
+            alt={`Foto de ${alumno.nombre}`}
+            style={{ width: '100px', height: '100px', objectFit: 'contain', marginBottom: '20px' }}
+          />
                   <Card.Title>{alumno.nombre} {alumno.apellido}</Card.Title>
                   <Card.Subtitle className="mb-2 text-muted">LU: {alumno.lu}</Card.Subtitle>
                   <Card.Text>
                     <strong>Curso:</strong> {alumno.curso}<br />
-                    <strong>Email:</strong> {alumno.email}<br />
+                    {/* <strong>Email:</strong> {alumno.email}<br />
                     <strong>Domicilio:</strong> {alumno.domicilio}<br />
-                    <strong>Teléfono:</strong> {alumno.telefono}<br />
+                    <strong>Teléfono:</strong> {alumno.telefono}<br /> */}
                     <strong>Estado:</strong>{' '}
                     <Badge bg={alumno.estado ? 'success' : 'secondary'}>
                       {alumno.estado ? 'Activo' : 'Inactivo'}
                     </Badge>
                   </Card.Text>
+                  <Button
+                    variant="info"
+                    onClick={() => setAlumnoSeleccionado(alumno)}
+                    className="mt-2"
+                  >
+                    Ver Detalle
+                  </Button>
                 </Card.Body>
               </Card>
             </Col>
