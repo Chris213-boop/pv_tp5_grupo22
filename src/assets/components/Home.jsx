@@ -6,10 +6,9 @@ import Image from 'react-bootstrap/Image';
 
 
 
-
 const Home = () => {
     return (
-        <Container>
+        <Container fluid>
             <Card className="text-center">
                 <Card.Body>
                     <Card.Title> Bienvenido al Sistema de Gestión de Alumnos </Card.Title>
@@ -21,7 +20,7 @@ const Home = () => {
                     <Button variant="primary">Ver Lista de ALumnos</Button>
                     </Link>
                 </Card.Body>
-                <Card.Footer className="text-muted">© 2025 Grupo 22 - v1.0</Card.Footer>
+                <Card.Footer className="text-muted bg-light p-4">© 2025 Grupo 22 - v1.0</Card.Footer>
             </Card>
         </Container>
     )
