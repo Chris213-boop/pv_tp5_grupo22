@@ -1,6 +1,6 @@
 import generarLUNuevo from "./generarLU";
 
-function Alumno({nombre, apellido, curso, email, domicilio, telefono, estado }){
+function Alumno({nombre, apellido, curso, email, domicilio, telefono, carrera, estado }){
   
     const lu =  Math.floor(Math.random() * 100000);
 
@@ -12,6 +12,7 @@ function Alumno({nombre, apellido, curso, email, domicilio, telefono, estado }){
         email,
         domicilio,
         telefono,
+        carrera,
         estado,
     };
 }

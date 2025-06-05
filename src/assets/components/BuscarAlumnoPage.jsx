@@ -6,6 +6,7 @@ import Container from "react-bootstrap/esm/Container";
 import Badge from 'react-bootstrap/Badge';
 
 import BuscarAlumno from './BuscarAlumno'; // función js
+import DetalleAlumno from './DetalleAlumno';
 
 function BuscarAlumnoPage({ alumnos }) {
   const [valorBusqueda, setValorBusqueda] = useState('');
@@ -23,6 +24,18 @@ function BuscarAlumnoPage({ alumnos }) {
       setNoEncontrado(true);
     }
   };
+  
+  if (resultado) {
+    return (
+      <DetalleAlumno
+        alumno={resultado}
+        volver={() => {
+          setResultado(null);
+          setValorBusqueda('');
+        }}
+      />
+    );
+  }
 
   return (
     <Container className="modal show" style={{ display: 'block', position: 'initial' }}>
@@ -46,6 +59,7 @@ function BuscarAlumnoPage({ alumnos }) {
         <Alert variant="success" className="mt-3">
           Alumno encontrado: {resultado.nombre} {resultado.apellido} (LU: {resultado.lu})
         </Alert>
+
       )}
 
       {noEncontrado && (

@@ -1,17 +1,15 @@
-import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import ListaAlumnosExistentes from '../components/ListaAlumnosExistentes'; 
 
-const DetalleAlumno = () => {
-  const { lu } = useParams();
-  const navigate = useNavigate();
-
-  const alumno = ListaAlumnosExistentes.find(a => a.lu === parseInt(lu));
-
+const DetalleAlumno = ({ alumno, volver }) => {
   if (!alumno) {
-    return <Navigate to="/MostrarListaAlumnos" replace />;
+    return (
+      <Container className="mt-4">
+        <p className="text-danger text-center">No se encontró el alumno seleccionado.</p>
+        <Button variant="secondary" onClick={volver}>Volver</Button>
+      </Container>
+    );
   }
 
   return (
@@ -34,15 +32,17 @@ const DetalleAlumno = () => {
           <p><strong>Email:</strong> {alumno.email}</p>
           <p><strong>Domicilio:</strong> {alumno.domicilio}</p>
           <p><strong>Teléfono:</strong> {alumno.telefono}</p>
-          <p><strong>Estado:</strong> {alumno.estado}</p>
+          <p><strong>Carrera:</strong> {alumno.carrera}</p>
+          <p><strong>Estado:</strong> {alumno.estado ? 'Activo' : 'Inactivo'}</p>
 
           <div className="mt-3">
-            <Button variant="secondary" onClick={() => navigate(-1)} className="me-2">
+            <Button variant="secondary" onClick={volver} className="me-2">
               Volver
             </Button>
-            <Button variant="warning" onClick={() => navigate(`/EditarAlumno/${alumno.lu}`)}>
+            {/* Este botón solo funcionará si tenés navegación, si no, podés quitarlo */}
+            {/* <Button variant="warning" onClick={() => navigate(`/EditarAlumno/${alumno.lu}`)}>
               Editar
-            </Button>
+            </Button> */}
           </div>
         </Card.Body>
       </Card>

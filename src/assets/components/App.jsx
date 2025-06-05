@@ -15,10 +15,53 @@ import MostrarListaAlumnos from './MostrarListaAlumnos';
 import BuscarAlumnoPage from './BuscarAlumnoPage';
 import BuscarAlumno from './BuscarAlumno';
 
+import AlumnoData from './AlumnoData';
 
 function App() {
-  const [alumnos, setAlumnos] = useState([]);
- 
+
+  const [alumnos, setAlumnos] = useState(() => [
+    AlumnoData({
+      nombre: "Ana",
+      apellido: "López",
+      curso: "3°A",
+      email: "ana.lopez@hotmail.com",
+      domicilio: "Calle Falsa 123",
+      telefono: "4230957",
+      carrera: "APU",
+      estado: true,
+    }),
+    AlumnoData({
+      nombre: "Carlos",
+      apellido: "Pérez",
+      curso: "2°B",
+      email: "carlos.perez@gmail.com",
+      domicilio: "Av. Siempre Viva 742",
+      telefono: "388-4842277",
+      carrera: "APU",
+      estado: true,
+    }),
+    AlumnoData({
+      nombre: "Lucía",
+      apellido: "Martínez",
+      curso: "1°C",
+      email: "lucia.martinez@gmail.com",
+      domicilio: "San Martín 500",
+      telefono: "388-4348958",
+      carrera: "APU",
+      estado: true,
+    }),
+    AlumnoData({
+      nombre: "Javier",
+      apellido: "Gómez",
+      curso: "4°D",
+      email: "javier.gomez@example.com",
+      domicilio: "Belgrano 1200",
+      telefono: "388-5253053",
+      carrera: "APU",
+      estado: true,
+    }),
+  ]);
+
   useEffect(() => {
     if (alumnos.length > 0) {
       console.log("Lista de alumnos actualizada:", alumnos);
@@ -32,15 +75,15 @@ function App() {
   const deshabilitarAlumno = useCallback((valorBusqueda) => {
     const alumnoEncontrado = BuscarAlumno(alumnos, valorBusqueda);
 
-    if(alumnoEncontrado && alumnoEncontrado.estado !== false) {
+    if (alumnoEncontrado && alumnoEncontrado.estado !== false) {
       setAlumnos(prev =>
         prev.map(alumno =>
-          alumno === alumnoEncontrado ? {...alumno, estado: false } : alumno
+          alumno === alumnoEncontrado ? { ...alumno, estado: false } : alumno
         )
       );
       return true;
-  }
-  return false;
+    }
+    return false;
   }, [alumnos]);
 
 
@@ -60,12 +103,12 @@ function App() {
       <Navbar bg="light" data-bs-theme="light">
         <Container fluid className="mt-4 bg-primary text-white p-4 rounded-3">
           <Nav.Link as={Link} to="/">Inicio</Nav.Link>
-          <Nav.Link as= {Link} to="/agregar">Agregar Alumno</Nav.Link>
-          <Nav.Link as= {Link} to="/buscar">Buscar Alumno</Nav.Link>
-          <Nav.Link as= {Link} to="/eliminar">Eliminar</Nav.Link>
-          <Nav.Link as= {Link} to="/editar">Editar Alumno</Nav.Link>
-          <Nav.Link as= {Link} to="/listar">Listar</Nav.Link>
-          <Nav.Link as= {Link} to="/nosotros">Nosotros</Nav.Link>
+          <Nav.Link as={Link} to="/agregar">Agregar Alumno</Nav.Link>
+          <Nav.Link as={Link} to="/buscar">Buscar Alumno</Nav.Link>
+          <Nav.Link as={Link} to="/eliminar">Eliminar</Nav.Link>
+          <Nav.Link as={Link} to="/editar">Editar Alumno</Nav.Link>
+          <Nav.Link as={Link} to="/listar">Listar</Nav.Link>
+          <Nav.Link as={Link} to="/nosotros">Nosotros</Nav.Link>
         </Container>
       </Navbar>
 
@@ -73,7 +116,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/agregar" element={<AlumnoFormulario onAddAlumno={handleAgregarAlumno} />} />
-          <Route path="/buscar" element={<BuscarAlumnoPage alumnos={alumnos} />} 
+          <Route path="/buscar" element={<BuscarAlumnoPage alumnos={alumnos} />}
           />
           <Route path="/eliminar" element={<AlumnoDelete onDelete={deshabilitarAlumno} />} />
           <Route path="/editar" element={<EditarAlumno alumnos={alumnos} onUpdate={actualizarAlumno} />} />
