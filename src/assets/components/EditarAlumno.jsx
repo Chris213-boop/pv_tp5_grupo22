@@ -1,7 +1,6 @@
 import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import AlumnoFormulario from '../components/AlumnoFormulario';
-import ListaAlumnosExistentesData from '../components/ListaAlumnosExistentes';
+import AlumnoFormulario from './AlumnoFormulario';
 import Container from 'react-bootstrap/Container';
 
 const EditarAlumno = () => {

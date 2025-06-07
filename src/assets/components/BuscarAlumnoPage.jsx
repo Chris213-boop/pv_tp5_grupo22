@@ -5,8 +5,8 @@ import Alert from 'react-bootstrap/Alert';
 import Container from "react-bootstrap/esm/Container";
 import Badge from 'react-bootstrap/Badge';
 
-import BuscarAlumno from './BuscarAlumno'; // función js
-import DetalleAlumno from './DetalleAlumno';
+import BuscarAlumno from '../hooks/BuscarAlumno'; // función js
+import DetalleAlumno from '../pages/DetalleAlumno';
 
 function BuscarAlumnoPage({ alumnos }) {
   const [valorBusqueda, setValorBusqueda] = useState('');

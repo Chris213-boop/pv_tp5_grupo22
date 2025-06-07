@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AlumnoData from './AlumnoData';
-import useValidacionAlumno from './useValidacionAlumno';
+import useValidacionAlumno from '../hooks/useValidacionAlumno';
 
 //componentes de bootstap
 import Button from 'react-bootstrap/Button';
