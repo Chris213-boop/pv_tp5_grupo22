@@ -1,4 +1,4 @@
-import generarLUNuevo from "./generarLU";
+//import generarLUNuevo from "./generarLU";
 
 function Alumno({nombre, apellido, curso, email, domicilio, telefono, carrera, estado }){
   

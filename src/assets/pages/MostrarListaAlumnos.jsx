@@ -1,6 +1,6 @@
 import { Container, Card, Row, Col, Badge } from 'react-bootstrap';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+//import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import DetalleAlumno from './DetalleAlumno';
 
