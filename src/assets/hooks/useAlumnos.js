@@ -2,12 +2,12 @@ import { useState, useEffect, useCallback } from 'react';
 import AlumnoData from '../components/AlumnoData';
 import BuscarAlumno from './BuscarAlumno';
 
-export default function useAlumnos() {
+function useAlumnos() {
   const [alumnos, setAlumnos] = useState(() => [
     AlumnoData({
       nombre: "Ana",
       apellido: "López",
-      curso: "3°A",
+      curso: "Comision 6",
       email: "ana.lopez@hotmail.com",
       domicilio: "Calle Falsa 123",
       telefono: "4230957",
@@ -17,7 +17,7 @@ export default function useAlumnos() {
     AlumnoData({
       nombre: "Carlos",
       apellido: "Pérez",
-      curso: "2°B",
+      curso: "Comision 3",
       email: "carlos.perez@gmail.com",
       domicilio: "Av. Siempre Viva 742",
       telefono: "388-4842277",
@@ -27,7 +27,7 @@ export default function useAlumnos() {
     AlumnoData({
       nombre: "Lucía",
       apellido: "Martínez",
-      curso: "1°C",
+      curso: "Comision 1",
       email: "lucia.martinez@gmail.com",
       domicilio: "San Martín 500",
       telefono: "388-4348958",
@@ -37,7 +37,7 @@ export default function useAlumnos() {
     AlumnoData({
       nombre: "Javier",
       apellido: "Gómez",
-      curso: "4°D",
+      curso: "Comision 5",
       email: "javier.gomez@example.com",
       domicilio: "Belgrano 1200",
       telefono: "388-5253053",
@@ -87,3 +87,5 @@ export default function useAlumnos() {
     actualizarAlumno
   };
 }
+
+export default useAlumnos;
