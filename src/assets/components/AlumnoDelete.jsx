@@ -10,7 +10,7 @@ function AlumnoDelete({ onDelete }) {
     const [confirmando, setConfirmando] = useState(false);
 
     const confirmarOcultamiento = () => {
-    const fueDesactivado = onDelete(lu); // lógica para ocultar al alumno
+    const fueDesactivado = onDelete(lu); 
 
     if (fueDesactivado) {
         alert(`Alumno con LU / Nombre / Apellido "${lu}" ha sido eliminado.`);

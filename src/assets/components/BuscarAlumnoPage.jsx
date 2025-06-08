@@ -12,19 +12,28 @@ function BuscarAlumnoPage({ alumnos }) {
   const [valorBusqueda, setValorBusqueda] = useState('');
   const [resultado, setResultado] = useState(null);
   const [noEncontrado, setNoEncontrado] = useState(false);
+  const [inactivo, setInactivo] = useState(false);   //estado del alumno
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const res = BuscarAlumno(alumnos, valorBusqueda);
     if (res) {
-      setResultado(res);
-      setNoEncontrado(false);
+      if (res.estado === true) {
+        setResultado(res);
+        setNoEncontrado(false);
+        setInactivo(false);
+      } else {
+        setResultado(null);
+        setNoEncontrado(false);
+        setInactivo(true);
+      }
     } else {
       setResultado(null);
       setNoEncontrado(true);
+      setInactivo(false);
     }
   };
-  
+
   if (resultado) {
     return (
       <DetalleAlumno
@@ -54,17 +63,15 @@ function BuscarAlumnoPage({ alumnos }) {
           Buscar
         </Button>
       </Form>
-
-      {resultado && (
-        <Alert variant="success" className="mt-3">
-          Alumno encontrado: {resultado.nombre} {resultado.apellido} (LU: {resultado.lu})
-        </Alert>
-
-      )}
-
       {noEncontrado && (
         <Alert variant="danger" className="mt-3">
           Alumno no encontrado.
+        </Alert>
+      )}
+
+      {inactivo && (
+        <Alert variant="warning" className="mt-3">
+          El alumno está inactivo y no puede ser consultado.
         </Alert>
       )}
     </Container>

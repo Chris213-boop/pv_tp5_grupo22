@@ -1,6 +1,5 @@
 import { Container, Card, Row, Col, Badge } from 'react-bootstrap';
 import { useState } from 'react';
-//import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import DetalleAlumno from './DetalleAlumno';
 
@@ -42,9 +41,6 @@ function MostrarListaAlumnos({ alumnos }) {
                   <Card.Subtitle className="mb-2 text-muted">LU: {alumno.lu}</Card.Subtitle>
                   <Card.Text>
                     <strong>Curso:</strong> {alumno.curso}<br />
-                    {/* <strong>Email:</strong> {alumno.email}<br />
-                    <strong>Domicilio:</strong> {alumno.domicilio}<br />
-                    <strong>Teléfono:</strong> {alumno.telefono}<br /> */}
                     <strong>Estado:</strong>{' '}
                     <Badge bg={alumno.estado ? 'success' : 'secondary'}>
                       {alumno.estado ? 'Activo' : 'Inactivo'}

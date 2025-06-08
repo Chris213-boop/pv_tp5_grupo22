@@ -39,10 +39,7 @@ const DetalleAlumno = ({ alumno, volver }) => {
             <Button variant="secondary" onClick={volver} className="me-2">
               Volver
             </Button>
-            {/* Este botón solo funcionará si tenés navegación, si no, podés quitarlo */}
-            {/* <Button variant="warning" onClick={() => navigate(`/EditarAlumno/${alumno.lu}`)}>
-              Editar
-            </Button> */}
+            
           </div>
         </Card.Body>
       </Card>
